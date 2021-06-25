@@ -229,6 +229,28 @@
        4.3 Survey Feedback Topic Modeling
       </a>
      </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#further-data-science-techniques">
+       4.4 Further Data Science Techniques
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#chatbot">
+         Chatbot
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#a-b-testing">
+         A/B testing
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#recommender-system">
+         Recommender system
+        </a>
+       </li>
+      </ul>
+     </li>
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -262,11 +284,11 @@
 <h2>Final Report<a class="headerlink" href="#final-report" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="executive-summary">
 <h3>1. Executive Summary<a class="headerlink" href="#executive-summary" title="Permalink to this headline">¶</a></h3>
-<p>TODO</p>
+<p>The Web Services team from the Government of Canada (GOC) is seeking advice on use cases of data science techniques that can be added to their current Adobe Analytics (AA) workflow. To tackle their questions, we demonstrate the application of: time series forecasting, prediction on service satisfaction, survey topic modeling, and provide overviews of Chatbot, A/B testing, and recommender system techniques. Reproducible approach is also developed by implementing python wrapper and Jupyter Book. These use cases show the benefits and value-added of employing data science techniques other than those offered by Adobe Analytics.</p>
 </div>
 <div class="section" id="introduction">
 <h3>2. Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h3>
-<p>TODO</p>
+<p>The Web Services team leverages AA to understand and analyze web traffic data. Although AA is a powerful tool that manages a large and complex dataset (timestamped web-traffic and personas for all traffic to GoC web properties), it has limitations in terms of data science applications. For example, AA is not capable of implementing advanced machine learning models to analyze online survey data. In addition, the data collected by AA is very large and complex. In order to get useful insights from the web data and provide better services to visitors, the Web Services team needs advanced data science tehniques, and most of them are hard to implement by AA alone. This project aims to show the Web Services team the benefits and value-added of employing data science techniques to the data collected through AA. Lastly, we will demonstrate the advantages of data science using multiple  techniques to achieve higher user satisfaction and task completion rate.</p>
 </div>
 <div class="section" id="data-product-and-results">
 <h3>3. Data Product and Results<a class="headerlink" href="#data-product-and-results" title="Permalink to this headline">¶</a></h3>
@@ -281,11 +303,31 @@
 <h3>4. Data Science Methods<a class="headerlink" href="#data-science-methods" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="time-series-forecasting">
 <h4>4.1 Time Series Forecasting<a class="headerlink" href="#time-series-forecasting" title="Permalink to this headline">¶</a></h4>
-<p>TODO</p>
+<p>Time series techniques predict the future values of a process within confidence bounds using a computational model. These techniques can be applied to a number of questions within the Web Services domain, ranging from web traffic forecasting to conversion predictions of users. Also, the time series forecasting can be used with other data science techniques mentioned in this report. This provides additional benefits such as implementing surveys on the pages of the website where traffic prediction is significantly high.</p>
+<div class="figure align-default" id="visitors-trend">
+<a class="reference internal image-reference" href="img/visitors-trend.png"><img alt="img/visitors-trend.png" src="img/visitors-trend.png" style="width: 700px; height: 350px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">Daily Web Traffic of unique visotrs coming to the Government of Canada website.</span><a class="headerlink" href="#visitors-trend" title="Permalink to this image">¶</a></p>
+</div>
+<p>There are many time series techniques available. However, we are going to focus on the <strong>Holt-Winters’ method, SARIMA, Recursive method</strong> and <strong>Prophet</strong> as these methods focus on trend and seasonality. Prior knowledge of trend/seasonality helps in tuning the model to get accurate prediction. From the above Unique visitors charts, the trend rises from a level of 1 million  on 1st January, 2019 to the level of 4 million on April, 2021. Also, we have a strong periodicity as traffic goes down every weekend and comes up again every Monday. By using all 4 techniques, more than 100 models were created and the technique Prophet was selected to forecast traffic. Below is the description of methods used in predicting unique visitors.</p>
+<p><strong>Holt-Winters’ method</strong>: Holt-Winter is also known as a linear exponential smoothing method. This model takes into account the data’s seasonality trend, and utilizes exponential smoothing to give more weight to more recent historical data.</p>
+<p><strong>Seasonal AutoRegressive Integrated Moving Average (SARIMA)</strong>: SARIMA captures moving averages throughout time series, taking into account the data’s trend, seasonality, and noise. This model includes user-specified values to increase the ‘fine-tune ability’ of the model.</p>
+<p><strong>Machine learning recursive method (MLRM)</strong>: This model is used to predict one-step ahead and the value obtained from the forecasting is then fed into the same model to predict the following step and so on until the desired forecasting horizon is reached.</p>
+<p><strong>Prophet</strong>: A big difference between Prophet and the other mentioned  models is that Prophet allows for multi-seasonality forecasting with daily, weekly, AND yearly (vs. OR), along with holiday detection. Prophet includes automatic detection for all seasonality/trend, but allows for user input for more precise fine-tuning.</p>
+<p>We used Prophet to predict the traffic on the entire website and  its 2 sections:  <strong>Revenue-agency</strong> (the most visited section) and <strong>Public-health</strong> (Covid related pages) and created an interactive dashboard to show the results. The dashboard can be accessed by <a class="reference external" href="https://forecastinguniquevisitors.herokuapp.com/">clicking here</a> .</p>
 </div>
 <div class="section" id="prediction-on-web-satisfaction">
 <h4>4.2 Prediction on Web Satisfaction<a class="headerlink" href="#prediction-on-web-satisfaction" title="Permalink to this headline">¶</a></h4>
-<p>TODO</p>
+<p>A satisfaction/task survey is presented to 5% of website visitors.  The Web Analytics team would like to use this information to extrapolate user satisfaction across all users to understand visitors’ experience and satisfaction level broadly. Several supervised machine learning models have been applied to find their predicting performances. Moreover, the top ten important features are extracted in terms of reflecting and predicting visitor satisfaction. Last but not least, we have demonstrate a hyperparameter tuning process to better optimize the predicting performance.</p>
+<div class="figure align-default" id="prediction-features">
+<a class="reference internal image-reference" href="_images/pred_feats.png"><img alt="_images/pred_feats.png" src="_images/pred_feats.png" style="width: 700px; height: 350px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text">Sample data and features have been used in predicting on satisfaction.</span><a class="headerlink" href="#prediction-features" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="prediction-results">
+<a class="reference internal image-reference" href="_images/pred_res.png"><img alt="_images/pred_res.png" src="_images/pred_res.png" style="width: 700px; height: 350px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">Model evaluation on their fitting time, accuracy and weighted f1 score.</span><a class="headerlink" href="#prediction-results" title="Permalink to this image">¶</a></p>
+</div>
+<p>After rounds of feature selection and data preprocessing, only seven features have been fitted, which are presented as above. From the figure 4? of model evaluation, <strong>MLP (Multi-layer Perceptron) and Random Forest</strong> are ranked as the top two best models, based on their relatively high score on accuracy and weighted f1 score. It is also noticeable that overfitting is not observed at this stage. All those 7 models predicted better than the baseline Dummy model, which suggests improving performance is possible with larger datasets. As a trade-off, MLP and Random Forest are also time-consuming in their model fitting time, which could be potentially solved when applying GPU architecture in neural networks modelling for its computing effectiveness. Another drawback of this modelling process is that the amount of features are still quite limited, and each data point is simplified as one entry, in which the connection of page referral is not considered in modelling. Ideally if the trajectory of a visitor’s browsing history is traced and fitted in a model, his behavior will be even better understood.</p>
+<p>Looking forward, for the next phase of this particular task, a larger volume of data should be analyzed, given this demonstration of only one week of data. Moreover, the time-series analysis could be another factor, since events or some particular circumstances (e.g., COVID) may influence visitors’ expectation. Understanding the sequential order of the browsing history would leverage the value of AA. If the sequential data are well cleaned and processed, the analytics team could even predict the next possible page a visitor would click. However, data cleaning and preprocessing techniques for sequence modelling can be very challenging, since the data collection and ingestion workflow in AA makes it hard to maintain sequential data.</p>
 </div>
 <div class="section" id="survey-feedback-topic-modeling">
 <h4>4.3 Survey Feedback Topic Modeling<a class="headerlink" href="#survey-feedback-topic-modeling" title="Permalink to this headline">¶</a></h4>
@@ -294,10 +336,25 @@
 <p>As expected, the GSDMM model can identify more specific and finer topic clusters compared to the other models. We can see the results of the different models topic assignment on the test feedback below.</p>
 <div class="figure align-default" id="feedback-examples">
 <a class="reference internal image-reference" href="_images/feedback-results.png"><img alt="_images/feedback-results.png" src="_images/feedback-results.png" style="width: 700px; height: 350px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">Example of test text feedback and topic assignments by the models</span><a class="headerlink" href="#feedback-examples" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text">Example of test text feedback and topic assignments by the models</span><a class="headerlink" href="#feedback-examples" title="Permalink to this image">¶</a></p>
 </div>
 <p>There are some areas of improvement for optimizing the analysis of text feedback data. First, we only have 3,181 feedback data, which is quite limited in training a sophisticated machine learning model. Second, it is crucial to improve the preprocessing of the text to include spell check, language, and anomaly detection to ensure accurate responses to the question being asked. Third, we don’t have ground truth labels for objectively evaluating the topic assignments of the models. Hence, it is helpful to train a supervised machine learning model on text feedback data and topic labels assigned by the GSDMM model, so that we can evaluate model performance and automatically assign topics for future feedback responses.</p>
 <p>Some of the difficulties encountered includes assigning values to the hyperparameters <strong>k</strong>,  <strong>alpha</strong> and <strong>beta</strong> of the GSDMM model.  Where k refers to number of topic clusters, alpha is the affinity toward groups with the same size and beta is the affinity toward groups with similar terms. Also in terms of clustering techniques, it is important to consider density-based methods such as <strong>DBSCAN</strong> <span id="id5">[<a class="reference internal" href="#id22"><span>SSE+17</span></a>]</span> and <strong>HDBSCAN</strong> <span id="id6">[<a class="reference internal" href="#id23"><span>MHA17</span></a>]</span>, which don’t require specifying the number of topic clusters.</p>
+</div>
+<div class="section" id="further-data-science-techniques">
+<h4>4.4 Further Data Science Techniques<a class="headerlink" href="#further-data-science-techniques" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="chatbot">
+<h5>Chatbot<a class="headerlink" href="#chatbot" title="Permalink to this headline">¶</a></h5>
+<p>Chatbot is an implementation of a deep learning model that associates certain responses with unstructured user statements. Chatbots can be efficient since the program can run 24/7 and respond to multiple visitors simultaneously. Chatobts can also collect large amounts of unstructured text data during conversations that can be used to inform other techniques such as topic modeling. Challenges and concerns of implementing Chatbot include: 1)  trade-off between budget and performance of chatbot, 2) concerns of collecting personal information, 3) accessibility of Chatbot, and 4) determining which department should implement chatbot.</p>
+</div>
+<div class="section" id="a-b-testing">
+<h5>A/B testing<a class="headerlink" href="#a-b-testing" title="Permalink to this headline">¶</a></h5>
+<p>A/B testing is a statistical hypothesis testing used to compare two versions (A and B) of a single variable. In the web analysis field, A/B testing is widely used in web analytics to understand users’ responses to online features. By collecting data on users’ behaviors, decision makers are able to know if certain changes are linked to any specific features with the help of A/B testing. Tests can be performed continuously, returning results on an ongoing basis. There are two challenges of implementing A/B testing. 1) It requires sufficient statistical knowledge to design the experiment correctly. 2) We need to try to avoid changes to the underlying data/web pages during the experiment.</p>
+</div>
+<div class="section" id="recommender-system">
+<h5>Recommender system<a class="headerlink" href="#recommender-system" title="Permalink to this headline">¶</a></h5>
+<p>Recommender system is developed to recommend certain content to web users. Two approaches to recommendation systems are collaborative filtering and content-based filtering. These two methods are usually combined into hybrid systems to develop more efficient services. In order to implement the system successfully, the Web Analytic team needs to be prepared for extensive machine learning and data mining, and it may take time to collect enough data for training purposes. It may also be challenging to determine the right measurement of model performance.</p>
+</div>
 </div>
 </div>
 <div class="section" id="conclusions-and-recommendations">
