@@ -3,7 +3,7 @@
 
 title: Data Science Meets Government of Canada Web Services
 author: Anita Li, Deepak Sidhu, Jianru Deng, Sakshi Jain
-logo: canada.png
+logo: img/goc.png
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
