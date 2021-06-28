@@ -1,4 +1,2 @@
-# Table of content
-# Learn more at https://jupyterbook.org/customize/toc.html
-#
-- file: final_report
+format: jb-book
+root: final_report
